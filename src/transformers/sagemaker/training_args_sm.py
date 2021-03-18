@@ -26,8 +26,7 @@ logger = logging.get_logger(__name__)
 
 
 def is_smdistributed_available():
-    return True
-   # return importlib.util.find_spec("smdistributed") is not None
+    return importlib.util.find_spec("smdistributed") is not None
 
 
 if is_smdistributed_available():
@@ -48,7 +47,6 @@ class SageMakerTrainingArguments(TrainingArguments):
 
     @property
     def _setup_devices(self) -> "torch.device":
-#        smp.init()
         logger.info("PyTorch: setting up devices")
         if self.no_cuda:
             device = torch.device("cpu")
