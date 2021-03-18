@@ -44,7 +44,7 @@ class SageMakerTrainingArguments(TrainingArguments):
         if is_smdistributed_available() and self.mp_parameters != "":
             smp.init()
 
-    @cached_property
+    @property
     def _setup_devices(self) -> "torch.device":
         logger.info("PyTorch: setting up devices")
         if self.no_cuda:
