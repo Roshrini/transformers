@@ -46,6 +46,7 @@ class SageMakerTrainingArguments(TrainingArguments):
 
     @property
     def _setup_devices(self) -> "torch.device":
+        smp.init()
         logger.info("PyTorch: setting up devices")
         if self.no_cuda:
             device = torch.device("cpu")
