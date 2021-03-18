@@ -32,6 +32,7 @@ def is_smdistributed_available():
 
 if is_smdistributed_available():
     import smdistributed.modelparallel.torch as smp
+    smp.init()
 
 
 @dataclass
@@ -53,7 +54,7 @@ class SageMakerTrainingArguments(TrainingArguments):
             device = torch.device("cpu")
             self._n_gpu = 0
         elif is_smdistributed_available() and self.mp_parameters != "":
-            smp.init()
+           # smp.init()
             local_rank = smp.local_rank()
             device = torch.device("cuda", local_rank)
             self._n_gpu = 1
