@@ -81,7 +81,7 @@ class SageMakerTrainer(Trainer):
     def __init__(self, args=None, **kwargs):
         self.is_model_parallel_enabled = is_smdistributed_available() and args.mp_parameters != ""
         super().__init__(args=args, **kwargs)
-        smp.init()
+       # smp.init()
 
     def is_world_process_zero(self) -> bool:
         """

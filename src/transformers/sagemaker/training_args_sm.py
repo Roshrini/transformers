@@ -42,8 +42,8 @@ class SageMakerTrainingArguments(TrainingArguments):
 
     def __post_init__(self):
         super().__post_init__()
-        if is_smdistributed_available() and self.mp_parameters != "":
-            smp.init()
+#        if is_smdistributed_available() and self.mp_parameters != "":
+ #           smp.init()
 
     @property
     def _setup_devices(self) -> "torch.device":
@@ -53,6 +53,7 @@ class SageMakerTrainingArguments(TrainingArguments):
             device = torch.device("cpu")
             self._n_gpu = 0
         elif is_smdistributed_available() and self.mp_parameters != "":
+            smp.init()
             local_rank = smp.local_rank()
             device = torch.device("cuda", local_rank)
             self._n_gpu = 1
